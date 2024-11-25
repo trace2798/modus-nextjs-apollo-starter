@@ -22,11 +22,12 @@ const GetQuoteClient: FC<GetQuoteClientProps> = ({}) => {
   const [getQuote, { loading, error, data }] = useLazyQuery(GET_QUOTE, {
     fetchPolicy: "no-cache",
     onCompleted: (data) => {
-      console.log("Trivia DATA from LLM", data.getQuote);
+      console.log("Quote data", data.getQuote);
       setQuote(data.randomQuote.quote);
     },
   });
   const handleQuoteClick = async () => {
+    console.log("Getting quote button clicked");
     getQuote();
   };
 
@@ -62,7 +63,7 @@ const GetQuoteClient: FC<GetQuoteClientProps> = ({}) => {
               <Button
                 type="submit"
                 onClick={handleQuoteClick}
-                disabled={loading}
+                disabled={loading || !data}
               >
                 Regenerate Quote
               </Button>
