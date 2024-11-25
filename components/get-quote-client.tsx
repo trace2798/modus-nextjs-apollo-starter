@@ -19,7 +19,7 @@ interface GetQuoteClientProps {}
 
 const GetQuoteClient: FC<GetQuoteClientProps> = ({}) => {
   const [quote, setQuote] = useState<string>("");
-  const [getQuote, { loading, error, data }] = useLazyQuery(GET_QUOTE, {
+  const [randomQuote, { loading, error, data }] = useLazyQuery(GET_QUOTE, {
     fetchPolicy: "no-cache",
     onCompleted: (data) => {
       console.log("Quote data", data);
@@ -28,7 +28,7 @@ const GetQuoteClient: FC<GetQuoteClientProps> = ({}) => {
   });
   const handleQuoteClick = async () => {
     console.log("Getting quote button clicked");
-    getQuote();
+    randomQuote();
   };
 
   console.log(data);
