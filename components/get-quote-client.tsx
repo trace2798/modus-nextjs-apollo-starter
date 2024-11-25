@@ -1,5 +1,9 @@
 "use client";
+import { GET_QUOTE } from "@/lib/queries";
+import { cn } from "@/lib/utils";
+import { useLazyQuery } from "@apollo/client";
 import { FC, useState } from "react";
+import { Button, buttonVariants } from "./ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,10 +13,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { Button, buttonVariants } from "./ui/button";
-import { GET_QUOTE } from "@/lib/queries";
-import { useLazyQuery, useSuspenseQuery } from "@apollo/client";
-import { cn } from "@/lib/utils";
 import { Skeleton } from "./ui/skeleton";
 
 interface GetQuoteClientProps {}
@@ -30,8 +30,7 @@ const GetQuoteClient: FC<GetQuoteClientProps> = ({}) => {
     console.log("Getting quote button clicked");
     randomQuote();
   };
-
-  console.log(data);
+  console.log("DATA", data);
 
   return (
     <>
