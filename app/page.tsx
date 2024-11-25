@@ -27,7 +27,7 @@ export default async function Home() {
       <div className="flex flex-col space-y-5">
         {" "}
         <h1 className="text-3xl">Client Side</h1>
-        {/* <GetQuoteClient /> */}
+        <GetQuoteClient />
       </div>
     </main>
   );
