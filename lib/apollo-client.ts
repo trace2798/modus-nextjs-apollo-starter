@@ -13,7 +13,7 @@ export const { getClient, query, PreloadQuery } = registerApolloClient(() => {
       //   uri: process.env.MODUS_API_BASE,
       uri: process.env.NEXT_PUBLIC_MODUS_API_BASE,
       headers: {
-        // "Content-Type": "application/json",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.HYPERMODE_API_TOKEN}`,
       },
       // you can disable result caching here if you want to

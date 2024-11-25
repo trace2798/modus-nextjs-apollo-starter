@@ -14,7 +14,7 @@ function makeClient() {
     // this needs to be an absolute url, as relative urls cannot be used in SSR
     uri: process.env.NEXT_PUBLIC_MODUS_API_BASE,
     headers: {
-      // "Content-Type": "application/json",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${process.env.HYPERMODE_API_TOKEN}`,
     },
     // you can disable result caching here if you want to
