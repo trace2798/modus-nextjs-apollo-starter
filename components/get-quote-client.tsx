@@ -56,6 +56,7 @@ const GetQuoteClient: FC<GetQuoteClientProps> = ({}) => {
               <div className=" items-center gap-4">
                 Quote: {quote || <Skeleton className="w-[200px] h-8" />}
               </div>
+              <div>{error && <div>Error: {error.message}</div>}</div>
             </div>
             <DialogFooter>
               <Button
