@@ -28,14 +28,14 @@ const GetQuoteClient: FC<GetQuoteClientProps> = ({}) => {
   // });
   const randomQuote = async () => {
     const { data, error } = await fetchQuoteAction();
-    console.log("DATA ACTION", data);
+    // console.log("DATA ACTION", data);
     if (error) {
       setError(error.message);
     }
     setQuote(data?.randomQuote.quote);
   };
   const handleQuoteClick = async () => {
-    console.log("Getting quote button clicked");
+    // console.log("Getting quote button clicked");
     randomQuote();
   };
   // console.log("DATA", data);
