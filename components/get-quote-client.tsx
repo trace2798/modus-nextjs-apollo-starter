@@ -22,7 +22,7 @@ const GetQuoteClient: FC<GetQuoteClientProps> = ({}) => {
   const [getQuote, { loading, error, data }] = useLazyQuery(GET_QUOTE, {
     fetchPolicy: "no-cache",
     onCompleted: (data) => {
-      console.log("Quote data", data.getQuote);
+      console.log("Quote data", data);
       setQuote(data.randomQuote.quote);
     },
   });
