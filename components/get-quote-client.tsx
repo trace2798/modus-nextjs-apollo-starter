@@ -1,7 +1,6 @@
 "use client";
-import { GET_QUOTE } from "@/lib/queries";
+import { fetchQuoteAction } from "@/app/actions";
 import { cn } from "@/lib/utils";
-import { useLazyQuery } from "@apollo/client";
 import { FC, useState } from "react";
 import { Button, buttonVariants } from "./ui/button";
 import {
@@ -19,18 +18,27 @@ interface GetQuoteClientProps {}
 
 const GetQuoteClient: FC<GetQuoteClientProps> = ({}) => {
   const [quote, setQuote] = useState<string>("");
-  const [randomQuote, { loading, error, data }] = useLazyQuery(GET_QUOTE, {
-    fetchPolicy: "no-cache",
-    onCompleted: (data) => {
-      console.log("Quote data", data);
-      setQuote(data.randomQuote.quote);
-    },
-  });
+  const [error, setError] = useState<string>("");
+  // const [randomQuote, { loading, error, data }] = useLazyQuery(GET_QUOTE, {
+  //   fetchPolicy: "no-cache",
+  //   onCompleted: (data) => {
+  //     console.log("Quote data", data);
+  //     setQuote(data.randomQuote.quote);
+  //   },
+  // });
+  const randomQuote = async () => {
+    const { data, error } = await fetchQuoteAction();
+    console.log("DATA ACTION", data);
+    if (error) {
+      setError(error.message);
+    }
+    setQuote(data?.randomQuote.quote);
+  };
   const handleQuoteClick = async () => {
     console.log("Getting quote button clicked");
     randomQuote();
   };
-  console.log("DATA", data);
+  // console.log("DATA", data);
 
   return (
     <>
@@ -56,16 +64,18 @@ const GetQuoteClient: FC<GetQuoteClientProps> = ({}) => {
               <div className=" items-center gap-4">
                 Quote: {quote || <Skeleton className="w-[200px] h-8" />}
               </div>
-              <div>{error && <div>Error: {error.message}</div>}</div>
+              <div>{error && <div>Error: {error}</div>}</div>
             </div>
             <DialogFooter>
-              <Button
-                type="submit"
-                onClick={handleQuoteClick}
-                disabled={loading || !data}
-              >
-                Regenerate Quote
-              </Button>
+              {quote && (
+                <Button
+                  type="submit"
+                  onClick={handleQuoteClick}
+                  // disabled={}
+                >
+                  Regenerate Quote
+                </Button>
+              )}
             </DialogFooter>
           </DialogContent>
         </Dialog>
